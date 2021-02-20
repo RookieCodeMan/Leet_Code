@@ -9,7 +9,7 @@ package Leet_Code
 // [2, 3, 1, 0, 2, 5, 3]
 // 输出：2 或 3
 
-func findRepeatNumber(nums []int) int {
+func FindRepeatNumber(nums []int) int {
 	// 法一hash表中存储是否出现过的,时间复杂度为O(n),空间复杂度为O(n)
 	repeatNumMap := make(map[int]int)
 	for i := 0; i < len(nums); i++ {
