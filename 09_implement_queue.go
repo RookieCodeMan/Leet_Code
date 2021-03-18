@@ -50,13 +50,14 @@ func (this *CQueue) DeleteHead() int {
 		//  将InputStack中的依次pop到OutputStack中
 		for i:= len(this.InputStack)-1 ;i>=0; i-- {
 			this.OutputStack = append(this.OutputStack, this.InputStack[i])
+			this.InputStack = this.InputStack[:len(this.InputStack)-1]
 		}
 		// 在从OutputStack
 		x := this.OutputStack[len(this.OutputStack)-1]
 		this.OutputStack = this.OutputStack[:len(this.OutputStack)-1]
 		return x
 	}
-		// 都为0
-	return 0
+		// 都为-1
+	return -1
 
 }
