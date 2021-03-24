@@ -17,7 +17,7 @@ package Leet_Code
 
 
 
-// 方法1，直接递归，效率太低
+// 方法1，直接递归，太多重复计算，效率太低
 func Fib(n int) int {
 	if n ==0 {
 		return 0
@@ -30,20 +30,32 @@ func Fib(n int) int {
 
 // 方法2，重复计算太多，尽量避免重复计算，从下往上算，时间复杂度为O（n）
 func Fib2(n int) int {
-	if n ==0 {
-		return 0
-	} else if n ==1{
-		return 1
+	if n ==0 || n ==1 {
+		return n
 	} else {
-		fib0 := 0
-		fib1 := 1
-		var fibX int
+		fibPre := 0
+		fibCur := 1
+		var fibNext int
 		for i:=2;i<=n;i++{
-			fibX = fib0+fib1
-			fib0 = fib1
-			fib1 = fibX
+			fibNext = (fibPre+fibCur) % 1000000007
+			fibPre = fibCur
+			fibCur = fibNext
 		}
-		return fibX
+		return fibNext
 	}
+}
 
+// 方法3，动态规划
+func Fib3(n int) int {
+	if n ==0 || n ==1 {
+		return n
+	} else {
+		dp := make([]int,n+1)
+		dp[0] = 0
+		dp[1] = 1
+		for i:=2;i<=n;i++{
+			dp[i] = (dp[i-1] + dp[i-2])% 1000000007
+		}
+		return dp[n]
+	}
 }
